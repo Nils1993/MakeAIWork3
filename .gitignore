@@ -127,25 +127,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .DS_Store
-opdrachten/practica/week07/image_recognition/notebook/datasets/
-solutions/
-opdrachten/practica/week07/image_recognition/notebook/numpy_opdracht2_solutions.ipynb
 .vscode/launch.json
-opdrachten/practica/week07/image_recognition/notebook/pics/2750/
-opdrachten/practica/week07/beeldherkenning/notebook/~/tensorflow_datasets
-opdrachten/practica/week07/beeldherkenning/notebook/csv/mnist_train.csv
-opdrachten/practica/week08/sql/Chinook.db
 cursisten/
 eurosat/src/static/uploads
 .vscode
 exp
-projects/eurosat/src/static/uploads
-projects/eurosat/src/node_modules
-projects/eurosat/src/package-lock.json
- ../.idea/
-projects/eurosat/.idea/
-projects/eurosat/data
 extra
-project/PROJECT.docx
-project/Grove project planning.docx
-Lessen/01.Beeldherkenning/Practicum/EuroSAT_RGB
+Lessen/01.Beeldherkenning/Practicum/EuroSAT_RGB/
