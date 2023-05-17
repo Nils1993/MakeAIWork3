@@ -22,4 +22,4 @@ class ImageFilter(object):
         return outputImgRGB
 
     def downSample(self, img):
-        return block_reduce(image=img, func=np.max)
+        return block_reduce(image=img, block_size=(2,2,1), func=np.max)
