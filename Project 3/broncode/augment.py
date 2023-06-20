@@ -92,18 +92,18 @@ for i in range(len(scab_data)):
 
 
 
-# Save images
-# for i in range(len(good_data)):
+# # Save images
+# # for i in range(len(good_data)):
 #     torchvision.io.write_jpeg(good_data[i],filename=f"{good_apples}good_apple{i}.jpg")
 
-for i in range(len(blotch_data)):
-    torchvision.io.write_jpeg(blotch_data[i],filename=f"{blotch_apples}blotch_apple_aug{i}.jpg")
+# for i in range(len(blotch_data)):
+#     torchvision.io.write_jpeg(blotch_data[i],filename=f"{blotch_apples}blotch_apple_aug{i}.jpg")
 
-for i in range(len(rot_data)):
-    torchvision.io.write_jpeg(rot_data[i],filename=f"{rot_apples}rot_apple_aug{i}.jpg")
+# for i in range(len(rot_data)):
+#     torchvision.io.write_jpeg(rot_data[i],filename=f"{rot_apples}rot_apple_aug{i}.jpg")
 
-for i in range(len(scab_data)):
-    torchvision.io.write_jpeg(scab_data[i],filename=f"{scab_apples}scab_apple_aug{i}.jpg")
+# for i in range(len(scab_data)):
+#     torchvision.io.write_jpeg(scab_data[i],filename=f"{scab_apples}scab_apple_aug{i}.jpg")
 
 
 
