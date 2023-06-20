@@ -166,7 +166,8 @@ class AppleClassifyer(nn.Module):
             aql = "REJECTED"
 
         statement = f"Amount of good apples: {good_apples}/{sample_size}"
-        return aql, statement
+        print(statement)
+        return aql, good_apples, bad_apples
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
 
