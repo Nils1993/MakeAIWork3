@@ -6,12 +6,12 @@ import seaborn as sn
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
+# -------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 # Create the convolutional neural net.
 class AppleClassifyer(nn.Module):
-# -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------------------------------------
     
     def __init__(self, img_size=64, c_in=3, loss_func=nn.CrossEntropyLoss()):
         # Use super() to call the nn.Module.
@@ -43,24 +43,28 @@ class AppleClassifyer(nn.Module):
             )
         
         self.loss_func = loss_func
-# -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------------------------------------
     # Create function to train my model with.
     def fit(self, train_loader, val_loader, test_loader, epochs, lr, opt_function=torch.optim.Adam):
         
         optimizer = opt_function(self.model.parameters(),lr )
+        # Set to cuda (gpu)
         self.model.to(self.cuda_available())
+        # Create empty list to save the validation results
         history = []
-        
+        # Training loop
         for epoch in range(epochs):
             print("epoch:",epoch+1)
             self.model.train()
             
             for batch in train_loader:
                 optimizer.zero_grad()
+                # I use the function loss_calc that I created below so that I can use this at the validation.
                 loss = self.loss_calc(batch)
                 loss.backward()
                 optimizer.step()
-                
+
+            # Validate
             with torch.no_grad():    
                 self.model.eval()
                 val_loss = []
@@ -69,20 +73,23 @@ class AppleClassifyer(nn.Module):
                     loss = self.loss_calc(batch)
                     val_loss.append(loss)  
             
+            # Append the sum(val_loss)
             history.append(sum(val_loss))
             print(sum(val_loss))        
         
-        accuracy = print("Accuracy:",round(self.evaluate_accuracy(test_loader)))
-        return history, accuracy
-# -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+        # I use a self made function return a percentage of the accuracy
+        acc = round(self.evaluate_accuracy(test_loader))
+        print("Accuracy:",acc)
+        return history, acc
+# -------------------------------------------------------------------------------------------------------------------------------------------------------
+    # Function for cuda
     def cuda_available(self):
 
         if torch.cuda.is_available():
             return torch.device("cuda")
         else:
             return torch.device("cpu")
-# -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------------------------------------
     # Create a function to calculate the loss
     def loss_calc(self, batch):
         image = batch[0].to(self.cuda_available())
@@ -91,7 +98,7 @@ class AppleClassifyer(nn.Module):
         loss = self.loss_func(pred, labels)
         return loss
 
-# -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------------------------------------
     # Create function to evaluate the accuracy of my model
     def evaluate_accuracy(self, test_loader):
         model_pred = []
@@ -127,7 +134,7 @@ class AppleClassifyer(nn.Module):
         acc = cor_pred/(cor_pred + bad_pred) * 100
         return acc
     
-# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------    
+# -------------------------------------------------------------------------------------------------------------------------------------------------------
     # A function to predict an image
     def predict_image(self, image):
         image = image.to(self.cuda_available())
@@ -137,7 +144,7 @@ class AppleClassifyer(nn.Module):
         result = y_pred
 
         return result
-# -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------------------------------------
     # A function to test a sample and add an AQL label
     def aql_classifyer(self,sample):
         good_apples = 0
@@ -168,7 +175,7 @@ class AppleClassifyer(nn.Module):
         statement = f"Amount of good apples: {good_apples}/{sample_size}"
         print(statement)
         return aql, good_apples, bad_apples
-# -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------------------------------------
     
 
 
